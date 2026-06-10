@@ -1,1 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aina Gaya Àvila | HPC Workflows and Climate AI</title>
+    <meta
+      name="description"
+      content="Personal website for Aina Gaya Àvila, focused on HPC workflows, climate simulations, machine learning, and Earth observation."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #dceefd;
+        --bg-soft: rgba(246, 251, 255, 0.84);
+        --panel: rgba(18, 62, 89, 0.92);
+        --panel-soft: rgba(255, 255, 255, 0.72);
+        --text: #12303f;
+        --muted: #48667a;
+        --line: rgba(18, 48, 63, 0.13);
+        --accent: #2e84c1;
+        --accent-soft: rgba(46, 132, 193, 0.12);
+        --deep: #14506f;
+        --shadow: 0 30px 80px rgba(18, 48, 63, 0.12);
+        --radius-lg: 32px;
+        --radius-md: 20px;
+        --radius-sm: 14px;
+        --max-width: 1180px;
+      }
 
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Archivo", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(46, 132, 193, 0.2), transparent 28%),
+          radial-gradient(circle at 85% 12%, rgba(126, 195, 237, 0.22), transparent 24%),
+          linear-gradient(180deg, #eef8ff 0%, #dbeefd 100%);
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(19, 39, 44, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(19, 39, 44, 0.03) 1px, transparent 1px);
+        background-size: 48px 48px;
+        pointer-events: none;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 85%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .site-shell {
+        width: min(calc(100% - 2rem), var(--max-width));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(18px);
+        background: rgba(232, 244, 255, 0.78);
+        border-bottom: 1px solid rgba(19, 39, 44, 0.08);
+      }
+
+      .topbar-inner {
+        width: min(calc(100% - 2rem), var(--max-width));
+        margin: 0 auto;
+        padding: 1rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .brand {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .nav a:hover,
+      .nav a:focus-visible {
+        color: var(--text);
+      }
+
+      section {
+        padding: 4.5rem 0;
+      }
+
+      .hero {
+        padding-top: 4rem;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.95fr;
+        gap: 2rem;
+        align-items: stretch;
+      }
+
+      .hero-copy,
+      .hero-panel,
+      .content-card,
+      .timeline-item,
+      .skills-panel,
+      .footer-card {
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-copy {
+        position: relative;
+        overflow: hidden;
+        padding: 3rem;
+        background: rgba(249, 253, 255, 0.8);
+        border: 1px solid rgba(19, 39, 44, 0.08);
+      }
+
+      .hero-copy::after {
+        content: "";
+        position: absolute;
+        width: 18rem;
+        height: 18rem;
+        right: -5rem;
+        top: -5rem;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(46, 132, 193, 0.24), transparent 68%);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 0.28rem rgba(217, 110, 63, 0.14);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        line-height: 0.96;
+      }
+
+      h1 {
+        margin-top: 1.25rem;
+        font-size: clamp(3rem, 7vw, 6rem);
+        letter-spacing: -0.05em;
+      }
+
+      .hero-lead {
+        margin: 1.5rem 0 0;
+        max-width: 38rem;
+        font-size: 1.08rem;
+        line-height: 1.75;
+        color: var(--muted);
+      }
+
+      .hero-actions {
+        margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 3.2rem;
+        padding: 0 1.25rem;
+        border-radius: 999px;
+        border: 1px solid rgba(19, 39, 44, 0.1);
+        text-decoration: none;
+        font-weight: 600;
+        transition:
+          transform 180ms ease,
+          background-color 180ms ease,
+          color 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .button:hover,
+      .button:focus-visible {
+        transform: translateY(-2px);
+      }
+
+      .button-primary {
+        color: #f7fbff;
+        background: var(--deep);
+      }
+
+      .button-secondary {
+        background: rgba(255, 255, 255, 0.52);
+      }
+
+      .button-secondary:hover,
+      .button-secondary:focus-visible {
+        background: rgba(255, 255, 255, 0.86);
+      }
+
+      .hero-meta {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+      }
+
+      .meta-pill,
+      .skill-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(19, 39, 44, 0.09);
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .hero-panel {
+        padding: 2rem;
+        background: var(--panel);
+        color: #f4ede0;
+        display: grid;
+        gap: 1.2rem;
+      }
+
+      .panel-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(244, 237, 224, 0.72);
+      }
+
+      .panel-title {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        letter-spacing: -0.05em;
+      }
+
+      .panel-copy {
+        color: rgba(244, 237, 224, 0.82);
+        line-height: 1.7;
+        font-size: 1rem;
+      }
+
+      .focus-list {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .focus-item {
+        padding: 1rem 1.1rem;
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .focus-item strong {
+        display: block;
+        margin-bottom: 0.35rem;
+      }
+
+      .section-heading {
+        display: grid;
+        gap: 0.85rem;
+        margin-bottom: 2rem;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(2rem, 4.5vw, 3.8rem);
+        letter-spacing: -0.05em;
+      }
+
+      .section-heading p {
+        margin: 0;
+        max-width: 46rem;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .about-grid,
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.4rem;
+      }
+
+      .content-card,
+      .footer-card {
+        padding: 2rem;
+        background: var(--bg-soft);
+        border: 1px solid rgba(19, 39, 44, 0.08);
+      }
+
+      .content-card p,
+      .footer-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .content-card h3,
+      .footer-card h3 {
+        font-size: 1.45rem;
+        margin-bottom: 0.9rem;
+        line-height: 1.1;
+      }
+
+      .content-card h4 {
+        margin: 1.4rem 0 0.65rem;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.84rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .content-card h4:first-of-type {
+        margin-top: 0;
+      }
+
+      .detail-list {
+        margin: 0;
+        padding-left: 1.1rem;
+        color: var(--muted);
+        display: grid;
+        gap: 0.95rem;
+      }
+
+      .detail-list li {
+        line-height: 1.7;
+      }
+
+      .detail-list a {
+        color: var(--deep);
+        font-weight: 600;
+      }
+
+      .detail-list strong {
+        color: var(--text);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 12rem 1fr;
+        gap: 1.4rem;
+        padding: 1.6rem;
+        background: rgba(247, 252, 255, 0.86);
+        border: 1px solid rgba(19, 39, 44, 0.08);
+      }
+
+      .timeline-year {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.88rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .timeline-role {
+        font-size: 1.35rem;
+        margin-bottom: 0.45rem;
+      }
+
+      .timeline-org {
+        display: block;
+        margin-bottom: 0.8rem;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .timeline-item p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .skills-layout {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 1.4rem;
+      }
+
+      .skills-panel {
+        padding: 2rem;
+        background: rgba(249, 253, 255, 0.8);
+        border: 1px solid rgba(19, 39, 44, 0.08);
+      }
+
+      .skills-block + .skills-block {
+        margin-top: 1.75rem;
+        padding-top: 1.75rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .skills-block h3 {
+        font-size: 1.35rem;
+        margin-bottom: 0.9rem;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+      }
+
+      .skill-pill {
+        background: #fafdff;
+      }
+
+      .accent-panel {
+        background:
+          radial-gradient(circle at top right, rgba(126, 195, 237, 0.24), transparent 30%),
+          linear-gradient(180deg, rgba(20, 80, 111, 0.96), rgba(18, 48, 63, 0.98));
+        color: #f3f9ff;
+      }
+
+      .accent-panel .skill-pill {
+        color: rgba(243, 249, 255, 0.94);
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.14);
+      }
+
+      .accent-panel p {
+        color: rgba(243, 249, 255, 0.82);
+      }
+
+      footer {
+        padding: 0 0 3.5rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-card a {
+        color: var(--deep);
+        font-weight: 600;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 700ms ease,
+          transform 700ms ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 960px) {
+        .hero-grid,
+        .skills-layout,
+        .about-grid,
+        .footer-grid,
+        .timeline-item {
+          grid-template-columns: 1fr;
+        }
+
+        .timeline-item {
+          gap: 0.85rem;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .topbar-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .hero-copy,
+        .hero-panel,
+        .content-card,
+        .skills-panel,
+        .footer-card,
+        .timeline-item {
+          padding: 1.45rem;
+          border-radius: 24px;
+        }
+
+        section {
+          padding: 3.5rem 0;
+        }
+
+        .hero {
+          padding-top: 2.5rem;
+        }
+
+        h1 {
+          font-size: clamp(2.7rem, 14vw, 4.5rem);
+        }
+
+        .hero-actions,
+        .hero-meta,
+        .nav {
+          gap: 0.7rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#top">Aina Gaya Àvila</a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#skills">Skills</a>
+          <a href="#publications">Publications</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top" class="site-shell">
+      <section class="hero">
+        <div class="hero-grid">
+          <article class="hero-copy reveal">
+            <span class="eyebrow">HPC workflows, climate science, and machine learning</span>
+            <h1>Aina Gaya Àvila</h1>
+            <p class="hero-lead">
+              Research engineer and PhD candidate working across Barcelona and
+              Munich on large-scale climate workflows, Earth observation, and
+              machine learning for geosciences.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="mailto:ainagayaavila@gmail.com">
+                Get in touch
+              </a>
+              <a class="button button-secondary" href="#experience">
+                Explore my work
+              </a>
+              <a class="button button-secondary" href="https://github.com/ainagaya">
+                GitHub
+              </a>
+              <a class="button button-secondary" href="https://linkedin.com/in/ainagaya">
+                LinkedIn
+              </a>
+            </div>
+            <div class="hero-meta" aria-label="Quick profile details">
+              <span class="meta-pill">Barcelona Supercomputing Center</span>
+              <span class="meta-pill">Technical University of Munich</span>
+              <span class="meta-pill">HPC, climate, and AI</span>
+            </div>
+          </article>
+
+          <aside class="hero-panel reveal">
+            <span class="panel-label">Current profile</span>
+            <h2 class="panel-title">Operational workflows for climate simulation at scale</h2>
+            <p class="panel-copy">
+              I build the infrastructure around computational Earth science:
+              workflow automation, portability across supercomputers, data
+              pipelines, and ML-ready climate datasets.
+            </p>
+            <div class="focus-list">
+              <div class="focus-item">
+                <strong>HPC workflows</strong>
+                Bash, Python, YAML, containers, and workflow orchestration for
+                operational climate simulations on EuroHPC systems.
+              </div>
+              <div class="focus-item">
+                <strong>Earth observation and AI</strong>
+                PhD work on coastal sea surface height with SWOT altimetry and
+                deep learning.
+              </div>
+              <div class="focus-item">
+                <strong>Leadership</strong>
+                Team coordination, user support, documentation, debugging, and
+                delivery under research and operational deadlines.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Experience</span>
+          <h2>Roles across HPC engineering, climate workflows, and research.</h2>
+          <p>
+            The last few years have centered on research engineering for
+            Destination Earth and related projects, alongside an ongoing PhD in
+            Earth observation and machine learning.
+          </p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-year">01/2026-Present</div>
+            <div>
+              <h3 class="timeline-role">PhD Candidate</h3>
+              <span class="timeline-org">
+                Technical University of Munich, Data Science in Earth
+                Observation
+              </span>
+              <p>
+                Researching coastal sea surface height with novel SWOT satellite
+                altimetry data and deep learning methods, with a toolkit that
+                includes PyTorch, GPUs, CUDA, and Earth observation workflows.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-year">02/2023-Present</div>
+            <div>
+              <h3 class="timeline-role">HPC Workflows Engineer</h3>
+              <span class="timeline-org">
+                Barcelona Supercomputing Center, Computational Earth Sciences
+              </span>
+              <p>
+                Developing and coordinating operational workflows for DestinE
+                projects including ClimateDT, EERIE, DE-393, and EDITO-Model
+                Lab. Since December 2024, leading a team of 6 engineers and the
+                workflow activity within a DG-CONNECT Destination Earth
+                contract.
+                Built workflows for kilometer-scale climate simulations,
+                containerized NEMO runs, automated benchmarking, and ML-ready
+                climate dataset creation. Daily work includes portability across
+                MareNostrum5 and LUMI, plus occasional deployments on Leonardo,
+                JUPITER, ATOS, Levante, JUWELS, and related systems.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-year">11/2022-06/2023</div>
+            <div>
+              <h3 class="timeline-role">Undergraduate Researcher</h3>
+              <span class="timeline-org">
+                Condensed Matter Physics Department, Universitat de Barcelona
+              </span>
+              <p>
+                Final degree project with Dr. Alberto Fernández-Nieves's group
+                on quantifying the colloidal gelation transition using image
+                compression, with a focus on Python-based data processing and
+                scientific writing.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-year">09/2021-08/2022</div>
+            <div>
+              <h3 class="timeline-role">Undergraduate Researcher</h3>
+              <span class="timeline-org">
+                UBICS, Institute of Complex Systems
+              </span>
+              <p>
+                Developed a computational application of a three-state opinion
+                model under the supervision of Dr. Albert Díaz-Guilera, working
+                with Python, NetworkX, NumPy, SciPy, Matplotlib, Pandas, Linux,
+                and Bash.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-year">2015-2022</div>
+            <div>
+              <h3 class="timeline-role">Private Teacher</h3>
+              <span class="timeline-org">Independent</span>
+              <p>
+                Taught maths, physics, chemistry, and English in one-to-one
+                settings, building a strong habit of clear explanation and
+                adapting technical material to different audiences.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="education">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Education and activities</span>
+          <h2>Physics training expanded into computational modelling and climate AI.</h2>
+          <p>
+            My academic path moves from fundamental physics into multiscale
+            computational modelling, uncertainty quantification, and now Earth
+            observation research at doctoral level.
+          </p>
+        </div>
+        <div class="about-grid">
+          <article class="content-card reveal">
+            <h3>MSc in Atomistic and Multiscale Computational Modelling in Physics</h3>
+            <p>
+              Completed jointly at Universitat Politècnica de Catalunya and
+              Universitat de Barcelona from September 2023 to June 2025. My
+              thesis focused on AI-assisted uncertainty quantification in
+              high-resolution climate projections, using AIFS and NeuralGCM on
+              MareNostrum5.
+            </p>
+          </article>
+          <article class="content-card reveal">
+            <h3>BSc in Fundamental Physics </h3>
+            <p>
+              Earned a physics degree at Universitat de Barcelona with honors
+              in Computational Physics, Image Processing and Computer Vision,
+              and Theoretical Mechanics.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Skills</span>
+          <h2>Languages, platforms, and tools I use daily.</h2>
+          <p>
+            My toolkit spans workflow automation, scientific programming,
+            containerized execution, data handling, and collaboration around
+            large operational research systems.
+          </p>
+        </div>
+        <div class="skills-layout">
+          <div class="skills-panel reveal">
+            <div class="skills-block">
+              <h3>Programming and technical tools</h3>
+              <div class="pill-row">
+                <span class="skill-pill">Python</span>
+                <span class="skill-pill">Fortran</span>
+                <span class="skill-pill">Bash</span>
+                <span class="skill-pill">LaTeX</span>
+                <span class="skill-pill">Gnuplot</span>
+                <span class="skill-pill">JavaScript</span>
+                <span class="skill-pill">HTML</span>
+                <span class="skill-pill">NumPy</span>
+                <span class="skill-pill">Pandas</span>
+                <span class="skill-pill">SciPy</span>
+                <span class="skill-pill">scikit-learn</span>
+                <span class="skill-pill">PyTorch</span>
+                <span class="skill-pill">Linux</span>
+                <span class="skill-pill">Git</span>
+                <span class="skill-pill">GitHub Actions</span>
+                <span class="skill-pill">Docker</span>
+                <span class="skill-pill">Apptainer</span>
+                <span class="skill-pill">Autosubmit</span>
+                <span class="skill-pill">SLURM</span>
+                <span class="skill-pill">NetCDF</span>
+                <span class="skill-pill">GRIB</span>
+              </div>
+            </div>
+            <div class="skills-block">
+              <h3>Platforms and domains</h3>
+              <div class="pill-row">
+                <span class="skill-pill">High Performance Computing</span>
+                <span class="skill-pill">Climate workflows</span>
+                <span class="skill-pill">Portability</span>
+                <span class="skill-pill">Containers</span>
+                <span class="skill-pill">CI/CD</span>
+                <span class="skill-pill">Machine Learning</span>
+                <span class="skill-pill">Deep Learning</span>
+                <span class="skill-pill">Satellite data</span>
+                <span class="skill-pill">Altimetry</span>
+                <span class="skill-pill">OpenMP/MPI</span>
+              </div>
+            </div>
+            <div class="skills-block">
+              <h3>Languages</h3>
+              <div class="pill-row">
+                <span class="skill-pill">Catalan (native)</span>
+                <span class="skill-pill">Spanish (native)</span>
+                <span class="skill-pill">English (fluent)</span>
+                <span class="skill-pill">French (beginner)</span>
+              </div>
+            </div>
+            <div class="skills-block">
+              <h3>Strengths</h3>
+              <div class="pill-row">
+                <span class="skill-pill">Leadership</span>
+                <span class="skill-pill">Problem-solving</span>
+                <span class="skill-pill">Project management</span>
+                <span class="skill-pill">User support</span>
+                <span class="skill-pill">Scientific writing</span>
+                <span class="skill-pill">Open source development</span>
+                <span class="skill-pill">Research collaboration</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="skills-panel accent-panel reveal">
+            <span class="panel-label">Working style</span>
+            <h3 class="panel-title">Portability, ownership, and support for real users.</h3>
+            <p class="panel-copy">
+              I am most at home in collaborative technical environments where
+              software has to work across infrastructures, serve many users, and
+              stay maintainable under change. That usually means debugging,
+              documentation, testing, and communication matter just as much as
+              the code itself.
+            </p>
+            <div class="pill-row">
+              <span class="skill-pill">Workflow design</span>
+              <span class="skill-pill">Benchmarking</span>
+              <span class="skill-pill">Technical writing</span>
+              <span class="skill-pill">Team coordination</span>
+              <span class="skill-pill">Reproducibility</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="publications">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Publications and talks</span>
+          <h2>Publications and presentations</h2>
+          <p></p>
+        </div>
+        <div class="about-grid">
+          <article class="content-card reveal">
+            <h3>Publications</h3>
+            <h4>Complex Networks</h4>
+            <ul class="detail-list">
+              <li>
+                Ferri, I., Gaya-Àvila, A., Díaz-Guilera, A., <strong>Three-state opinion model with mobile agents</strong>.
+                <em>Chaos</em> 33, 093121 (2023).
+                <a href="https://doi.org/10.1063/5.0152674">doi.org/10.1063/5.0152674</a>
+              </li>
+            </ul>
+            <h4>Earth and Space Science Informatics</h4>
+            <ul class="detail-list">
+              <li>
+                John, A., Beyer, S., (...) Gaya-Àvila, A., et al.
+                <strong>Global Storyline Simulations at the Kilometre-scale</strong>.
+                <em>ESS Open Archive</em> (2024).
+                <a href="https://doi.org/10.22541/essoar.173160166.64258929/v1">doi.org/10.22541/essoar.173160166.64258929/v1</a>
+              </li>
+              <li>
+                Doblas-Reyes, F. J., Kontkanen, J., Sandu, I., Acosta, M., (...) Gaya-Àvila, A., et al.
+                <strong>The Destination Earth digital twin for climate change adaptation</strong>.
+                <em>EGUsphere</em> (2025).
+                <a href="https://doi.org/10.5194/egusphere-2025-2198">doi.org/10.5194/egusphere-2025-2198</a>
+              </li>
+            </ul>
+          </article>
+          <article class="content-card reveal">
+            <h3>Conference Papers and Presentations</h3>
+            <h4>European Geosciences Union General Assembly, 04/2024</h4>
+            <ul class="detail-list">
+              <li>
+                Gaya-Àvila, A. et al., <strong>A workflow for the Climate Digital Twin</strong>, EGU General Assembly 2024,
+                Vienna, Austria, 14-19 Apr 2024, EGU24-2533.
+                <a href="https://doi.org/10.5194/egusphere-egu24-2533">doi.org/10.5194/egusphere-egu24-2533</a>
+              </li>
+              <li>
+                Roura-Adserias, F., Gaya-Àvila, A. et al., <strong>The data streaming in the Climate Adaptation Digital Twin: a fundamental piece to transform climate data into climate information</strong>,
+                EGU General Assembly 2024, Vienna, Austria, 14-19 Apr 2024, EGU24-2164, 2024.
+                <a href="https://doi.org/10.5194/egusphere-egu24-2164">doi.org/10.5194/egusphere-egu24-2164</a>
+              </li>
+              <li>
+                Keller, K., Acosta, M., Ghosh, S., Gaya Avila, A., Wagner, I., and Paronuzzi, S.,
+                <strong>The Backbone of the Destination Earth Climate Adaptation Digital Twin</strong>,
+                EGU General Assembly 2024, Vienna, Austria, 14-19 Apr 2024, EGU24-9492, 2024.
+                <a href="https://doi.org/10.5194/egusphere-egu24-9492">doi.org/10.5194/egusphere-egu24-9492</a>
+              </li>
+            </ul>
+            <h4>European Geosciences Union General Assembly, 04/2025</h4>
+            <ul class="detail-list">
+              <li>
+                Gaya-Àvila, A., de Paula Kinoshita, B., Paronuzzi Ticco, S. V., Tintó Prims, O., and Castrillo, M.,
+                <strong>A workflow for cloud-based and HPC simulations with the NEMO ocean model using containers</strong>,
+                EGU General Assembly 2025, Vienna, Austria, 27 Apr-2 May 2025, EGU25-1511, 2025.
+                <a href="https://doi.org/10.5194/egusphere-egu25-1511">doi.org/10.5194/egusphere-egu25-1511</a>
+              </li>
+              <li>
+                Roura-Adserias, F., Gaya-Avila, A., Arriola i Meikle, L., Gonzalez-Yeregi, I., De Paula Kinoshita, B., Tollander de Balsch, J., and Castrillo, M.,
+                <strong>ClimateDT Workflow: A containerized climate workflow</strong>,
+                EGU General Assembly 2025, Vienna, Austria, 27 Apr-2 May 2025, EGU25-4466, 2025.
+                <a href="https://doi.org/10.5194/egusphere-egu25-4466">doi.org/10.5194/egusphere-egu25-4466</a>
+              </li>
+              <li>
+                Garcia Lopez, A., Arriola Meikle, L., Montane Pinto, G., Castrillo, M., de Paula Kinoshita, B., Ferrer Escuin, E., and Gaya-Àvila, A.,
+                <strong>Enabling reliable workflow development with an advanced Testing Suite</strong>,
+                EGU General Assembly 2025, Vienna, Austria, 27 Apr-2 May 2025, EGU25-8305, 2025.
+                <a href="https://doi.org/10.5194/egusphere-egu25-8305">doi.org/10.5194/egusphere-egu25-8305</a>
+              </li>
+              <li>
+                Gonzalez-Yeregi, I., Bretonnière, P.-A., Gaya-Àvila, A., and Roura-Adserias, F.,
+                <strong>Generic State Vector: streaming and accessing high resolution climate data from models to end users</strong>,
+                EGU General Assembly 2025, Vienna, Austria, 27 Apr-2 May 2025, EGU25-4355, 2025.
+                <a href="https://doi.org/10.5194/egusphere-egu25-4355">doi.org/10.5194/egusphere-egu25-4355</a>
+              </li>
+              <li>
+                Caprioli, S., von Hardenberg, J., Nurisso, M., Davini, P., Nazarova, N., Ghosh, S., Cadau, M., Mubarak Rajput, M., Gaya-Àvila, A., and Zimmermann, J.,
+                <strong>Model evaluation for km-scale simulations within the Climate Adaptation Digital Twin: the AQUA approach</strong>,
+                EGU General Assembly 2025, Vienna, Austria, 27 Apr-2 May 2025, EGU25-10347, 2025.
+                <a href="https://doi.org/10.5194/egusphere-egu25-10347">doi.org/10.5194/egusphere-egu25-10347</a>
+              </li>
+            </ul>
+            <h4>NeurIPS, 12/2025</h4>
+            <ul class="detail-list">
+              <li>
+                Gaya-Àvila, A., Mozaffari, A., Duarte, A., Tintó Prims, O.,
+                <strong>A modular framework to run AI-based models from high-resolution climate projections</strong>,
+                Tackling Climate Change with Machine Learning, San Diego, USA, 7 Dec 2025.
+                <a href="https://neurips.cc/virtual/2025/loc/san-diego/126907">neurips.cc/virtual/2025/loc/san-diego/126907</a>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="site-shell">
+      <div class="footer-grid">
+        <article class="footer-card reveal">
+          <h3>Let’s talk</h3>
+          <p>
+            The easiest place to reach me is
+            <a href="mailto:ainagayaavila@gmail.com">ainagayaavila@gmail.com</a>.
+            You can also find me on
+            <a href="https://github.com/ainagaya">GitHub</a>
+            and
+            <a href="https://linkedin.com/in/ainagaya">LinkedIn</a>.
+          </p>
+        </article>
+      </div>
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+        }
+      );
+
+      document.querySelectorAll(".reveal").forEach((element) => {
+        observer.observe(element);
+      });
+    </script>
+  </body>
+</html>
